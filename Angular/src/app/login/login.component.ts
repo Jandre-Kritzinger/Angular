@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {LoginService} from "../services/login.service";
 import {takeUntil} from "rxjs";
 import {Subject} from 'rxjs';
+import {LoginResponseModel} from "../models/loginDetails.model";
 
 @Component({
   selector: 'app-login',
@@ -15,14 +16,14 @@ export class LoginComponent {
   password = '';
   constructor(private loginService: LoginService) {}
   destroy$: Subject<boolean> = new Subject<boolean>()
-  login(){
+  async login(){
     let loginDetails = {
       email: this.email,
       password: this.password
     }
-     this.loginService.login(loginDetails).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      console.log('message::::', data)
-      this.accessToken = data
+     await this.loginService.login(loginDetails).then((res: LoginResponseModel) => {
+      console.log(res)
+      this.accessToken = res.accessToken
     })
   }
   ngOnDestroy() {
