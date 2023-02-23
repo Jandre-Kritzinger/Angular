@@ -22,7 +22,7 @@ export class LoginComponent {
       email: this.email,
       password: this.password
     }
-     let res = await this.loginService.login(loginDetails).subscribe((res) => {
+     await this.loginService.login(loginDetails).then((res) => {
        this.accessToken = res
        debugger
        if(this.accessToken === "Invalid Details"){

@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private http: HttpClient) {}
   rootURL = 'http://localhost:4000'
 
-  login(loginDetails: LoginRequestModel): Observable<LoginResponseModel>{
+  /*login(loginDetails: LoginRequestModel): Observable<LoginResponseModel>{
     return new Observable<LoginResponseModel> (observer => {
       return this.http.post('http://localhost:4000/login', loginDetails)
         .subscribe(result => {
@@ -21,19 +21,19 @@ export class LoginService {
         return error
       })
     })
-  }
+  }*/
 
-  /*addProspectConsent(data) {
+  login(loginDetails: LoginRequestModel) {
     return new Promise((resolve, reject) => {
       return this.http.post(
-        `${environment.oneLifeFunctionAppUrl}AddProspectConsent`, JSON.stringify(data)
+        'http://localhost:4000/login', loginDetails
       ).subscribe((res) => {
-        return resolve(res as AddProspectConsentResponseModel)
+        return resolve(res as LoginResponseModel)
       }, (err) => {
         return reject(err)
       })
     })
-  }*/
+  }
   /*login(loginDetails: any): any{
     this.http.post(this.api+"login", loginDetails)
       .subscribe(
