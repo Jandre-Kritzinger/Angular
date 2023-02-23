@@ -8,4 +8,5 @@ export interface SignUpRequestModel {
 
 export interface SignUpResponseModel {
   accessToken: String
+  success: boolean
 }

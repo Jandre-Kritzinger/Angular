@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SignUpRequestModel, SignUpResponseModel} from "../models/signUpDetails.model";
+import {LoginRequestModel, LoginResponseModel} from "../models/loginDetails.model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,16 @@ export class RegistrationService {
 
   rootURL = 'http://localhost:4000'
 
-  signUp(signUpDetails: SignUpRequestModel): Observable<SignUpResponseModel> {
-    return new Observable<SignUpResponseModel>(observer => {
+  signUp(signUpDetails: SignUpRequestModel): Promise<SignUpResponseModel> {
+    return new Promise<SignUpResponseModel>((resolve, reject) => {
       return this.http.post('http://localhost:4000/signup', signUpDetails)
-        .subscribe(result => {
-          observer.next(result as SignUpResponseModel)
-          observer.complete()
-        }, (error) => {
-          return error(error)
+        .subscribe({
+          next: (res) => {
+            return resolve(res as SignUpResponseModel)
+          },
+          error: (err) => {
+            return reject(err)
+          }
         })
     })
   }

@@ -11,19 +11,34 @@ export class LoginService {
   constructor(private http: HttpClient) {}
   rootURL = 'http://localhost:4000'
 
-  /*login(loginDetails: LoginRequestModel): Observable<LoginResponseModel>{
-    return new Observable<LoginResponseModel> (observer => {
-      return this.http.post('http://localhost:4000/login', loginDetails)
-        .subscribe(result => {
-          observer.next(result as LoginResponseModel)
-          observer.complete()
-      }, (error)=>{
-        return error
+  login(loginDetails: LoginRequestModel): Promise <LoginResponseModel> {
+    return new Promise<LoginResponseModel>((resolve, reject) => {
+      return this.http.post(
+        'http://localhost:4000/login', loginDetails
+      ).subscribe({
+        next: (res) => {
+          return resolve(res as LoginResponseModel)
+        },
+        error: (err) => {
+          return reject(err)
+        }
       })
     })
-  }*/
+  }
 
-  login(loginDetails: LoginRequestModel) {
+  /*login(loginDetails: LoginRequestModel): Observable<LoginResponseModel>{
+   return new Observable<LoginResponseModel> (observer => {
+     return this.http.post('http://localhost:4000/login', loginDetails)
+       .subscribe(result => {
+         observer.next(result as LoginResponseModel)
+         observer.complete()
+     }, (error)=>{
+       return error
+     })
+   })
+ }*/
+
+  /*login(loginDetails: LoginRequestModel) {
     return new Promise((resolve, reject) => {
       return this.http.post(
         'http://localhost:4000/login', loginDetails
@@ -33,7 +48,8 @@ export class LoginService {
         return reject(err)
       })
     })
-  }
+  }*/
+
   /*login(loginDetails: any): any{
     this.http.post(this.api+"login", loginDetails)
       .subscribe(

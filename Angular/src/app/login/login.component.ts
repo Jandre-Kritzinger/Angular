@@ -1,9 +1,6 @@
-import { Component } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Component, OnDestroy} from '@angular/core';
 import {LoginService} from "../services/login.service";
-import {takeUntil} from "rxjs";
 import {Subject} from 'rxjs';
-import {LoginResponseModel} from "../models/loginDetails.model";
 import {Router} from "@angular/router";
 
 @Component({
@@ -11,26 +8,26 @@ import {Router} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   accessToken: any;
   email = '';
   password = '';
   constructor(private loginService: LoginService, private router: Router) {}
   destroy$: Subject<boolean> = new Subject<boolean>()
-  async login(){
+  login(){
     let loginDetails = {
       email: this.email,
       password: this.password
     }
-     await this.loginService.login(loginDetails).then((res) => {
-       this.accessToken = res
-       debugger
-       if(this.accessToken === "Invalid Details"){
+     this.loginService.login(loginDetails).then((res) => {
+       this.accessToken = res.accessToken
+       const success = res.success
+       if(success){
          this.router.navigate(['/cars'])
        } else {
-         this.router.navigate(['/home'])
+         this.router.navigate(['/login'])
        }
-    })
+    }).catch()
   }
   ngOnDestroy() {
     this.destroy$.next(true);

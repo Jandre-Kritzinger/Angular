@@ -4,4 +4,5 @@ export interface LoginRequestModel {
 }
 export interface LoginResponseModel {
   accessToken: String
+  success: boolean
 }
