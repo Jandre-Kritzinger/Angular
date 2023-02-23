@@ -1,17 +1,27 @@
 <h2>Register</h2>
-<form>
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="email" required>
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Password</mat-label>
-    <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password" required>
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Register</button>
-</form>
-<mat-toolbar color="primary">
-  <a mat-button routerLink="/login">Login</a>
-  <a mat-button routerLink="/home">Home</a>
-  <a mat-button routerLink="/about">About</a>
-</mat-toolbar>
+<div style="display: flex; flex-direction: column;">
+  <form>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" type="name" name="name" [(ngModel)]="name" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Surname</mat-label>
+      <input matInput placeholder="Surname" type="surname" name="surname" [(ngModel)]="surname" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="email" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" (click)="signUp()">Register</button>
+  </form>
+  <mat-toolbar color="primary">
+    <a mat-button routerLink="/login">Login</a>
+    <a mat-button routerLink="/home">Home</a>
+    <a mat-button routerLink="/about">About</a>
+  </mat-toolbar>
+</div>

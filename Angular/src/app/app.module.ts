@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
+import { InvalidDetailsDialogComponent } from './dialogs/invalidDetailsDialog.component'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AboutComponent } from './about/about.component';
@@ -15,13 +15,15 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from "@angular/common/http";
+import { CarsComponent } from './cars/cars.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegistrationComponent }
+  { path: 'register', component: RegistrationComponent },
+  { path: 'cars', component: CarsComponent}
 ]
 
 @NgModule({
@@ -31,7 +33,9 @@ const routes: Routes = [
     AboutComponent,
     HomeComponent,
     HeaderComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    CarsComponent,
+    InvalidDetailsDialogComponent
   ],
   imports: [
     HttpClientModule,

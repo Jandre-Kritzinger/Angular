@@ -4,6 +4,7 @@ import {LoginService} from "../services/login.service";
 import {takeUntil} from "rxjs";
 import {Subject} from 'rxjs';
 import {LoginResponseModel} from "../models/loginDetails.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -14,22 +15,28 @@ export class LoginComponent {
   accessToken: any;
   email = '';
   password = '';
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
   destroy$: Subject<boolean> = new Subject<boolean>()
   async login(){
     let loginDetails = {
       email: this.email,
       password: this.password
     }
-     await this.loginService.login(loginDetails).then((res: LoginResponseModel) => {
-      console.log(res)
-      this.accessToken = res.accessToken
+     let res = await this.loginService.login(loginDetails).subscribe((res) => {
+       this.accessToken = res
+       debugger
+       if(this.accessToken === "Invalid Details"){
+         this.router.navigate(['/cars'])
+       } else {
+         this.router.navigate(['/home'])
+       }
     })
   }
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.complete();
   }
+
 
   /*login() {
 
